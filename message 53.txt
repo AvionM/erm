@@ -2702,24 +2702,5 @@ function Menu:Init()
     end)
 end
 
-Menu:SetSize(500, 400)
-Menu.Notify("Script Loaded.", 2)
-Menu.Tab("TEST")
-Menu.Container("TEST", "YES", "Left")
-Menu.ComboBox("TEST", "YES", "Combobox", "One", {"One", "Two", "Three"}, function()
-    
-end, "ComboBox Tooltip")
-Menu.ColorPicker("TEST", "YES", "Colorpicker", Color3.fromRGB(255, 0, 0), 1, function()
-    
-end, "Colorpicker Tooltip")
-Menu.Slider("TEST", "YES", "Slider", 1, 100, 50, "%", 0, function()
-    
-end, "Slider Tooltip")
-Menu.Label("TEST", "YES", "Label", "Label Tooltip")
-Menu.CheckBox("TEST", "YES", "Checkbox", false, function() 
-    
-end, "Checkbox Tooltip")
 
-Menu:SetTitle("Nigger.Lua")
-Menu:SetVisible(true)
-Menu:Init()
+return Menu
