@@ -1,4 +1,4 @@
-getgenv().crosshair = {
+getgenv().cursor = {
 
     enabled = true,
     refreshrate = 0.015,
@@ -38,7 +38,7 @@ local camera = workspace.CurrentCamera
 local last_render = 0
 
 local drawings = {
-    crosshair = {},
+    cursor = {},
     text = {
         Drawing.new('Text', {Size = 13, Font = 2, Outline = true, Text = 'Misery', Color = Color3.new(1,1,1)}),
         Drawing.new('Text', {Size = 13, Font = 2, Outline = true, Text = '.cc'}),
@@ -46,8 +46,8 @@ local drawings = {
 }
 
 for idx = 1, 4 do
-    drawings.crosshair[idx] = Drawing.new('Line')
-    drawings.crosshair[idx + 4] = Drawing.new('Line')
+    drawings.cursor[idx] = Drawing.new('Line')
+    drawings.cursor[idx + 4] = Drawing.new('Line')
 end
 
 function solve(angle, radius)
@@ -61,63 +61,64 @@ runservice.PostSimulation:Connect(function()
 
     local _tick = tick()
 
-    if _tick - last_render > crosshair.refreshrate then
+    if _tick - last_render > cursor.refreshrate then
         last_render = _tick
 
         local position = (
-            crosshair.mode == 'center' and camera.ViewportSize / 2 or
-            crosshair.mode == 'mouse' and inputservice:GetMouseLocation() or
-            crosshair.position
+            cursor.mode == 'center' and camera.ViewportSize / 2 or
+            cursor.mode == 'mouse' and inputservice:GetMouseLocation() or
+            cursor.position
         )
 
         local text_1 = drawings.text[1]
         local text_2 = drawings.text[2]
 
-        text_1.Visible = crosshair.enabled
-        text_2.Visible = crosshair.enabled
+        text_1.Visible = cursor.enabled
+        text_2.Visible = cursor.enabled
 
-        if crosshair.enabled then
+        if cursor.enabled then
 
             local text_x = text_1.TextBounds.X + text_2.TextBounds.X
 
-            text_1.Position = position + Vector2.new(-text_x / 2, crosshair.radius + (crosshair.resize and crosshair.resize_max or crosshair.length) + 15)
+            text_1.Position = position + Vector2.new(-text_x / 2, cursor.radius + (cursor.resize and cursor.resize_max or cursor.length) + 15)
             text_2.Position = text_1.Position + Vector2.new(text_1.TextBounds.X)
-            text_2.Color = crosshair.color
+            text_2.Color = cursor.color
             
             for idx = 1, 4 do
-                local outline = drawings.crosshair[idx]
-                local inline = drawings.crosshair[idx + 4]
+                local outline = drawings.cursor[idx]
+                local inline = drawings.cursor[idx + 4]
     
                 local angle = (idx - 1) * 90
-                local length = crosshair.length
+                local length = cursor.length
     
-                if crosshair.spin then
-                    local spin_angle = -_tick * crosshair.spin_speed % crosshair.spin_max
-                    angle = angle + tweenservice:GetValue(spin_angle / 360, crosshair.spin_style, Enum.EasingDirection.InOut) * 360
+                if cursor.spin then
+                    local spin_angle = -_tick * cursor.spin_speed % cursor.spin_max
+                    angle = angle + tweenservice:GetValue(spin_angle / 360, cursor.spin_style, Enum.EasingDirection.InOut) * 360
                 end
     
-                if crosshair.resize then
-                    local resize_length = tick() * crosshair.resize_speed % 180
-                    length = crosshair.resize_min + math.sin(math.rad(resize_length)) * crosshair.resize_max
+                if cursor.resize then
+                    local resize_length = tick() * cursor.resize_speed % 180
+                    length = cursor.resize_min + math.sin(math.rad(resize_length)) * cursor.resize_max
                 end
     
                 inline.Visible = true
-                inline.Color = crosshair.color
-                inline.From = position + solve(angle, crosshair.radius)
-                inline.To = position + solve(angle, crosshair.radius + length)
-                inline.Thickness = crosshair.width
+                inline.Color = cursor.color
+                inline.From = position + solve(angle, cursor.radius)
+                inline.To = position + solve(angle, cursor.radius + length)
+                inline.Thickness = cursor.width
     
                 outline.Visible = true
-                outline.From = position + solve(angle, crosshair.radius - 1)
-                outline.To = position + solve(angle, crosshair.radius + length + 1)
-                outline.Thickness = crosshair.width + 1.5    
+                outline.From = position + solve(angle, cursor.radius - 1)
+                outline.To = position + solve(angle, cursor.radius + length + 1)
+                outline.Thickness = cursor.width + 1.5    
             end
         else
             for idx = 1, 4 do
-                drawings.crosshair[idx].Visible = false
-                drawings.crosshair[idx + 4].Visible = false
+                drawings.cursor[idx].Visible = false
+                drawings.cursor[idx + 4].Visible = false
             end
         end
 
     end
 end)
+return cursor
