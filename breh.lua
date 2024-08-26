@@ -15,8 +15,8 @@ local Settings = {
     
     ItemColor = Color3.fromRGB(30, 30, 30),
     BorderColor = Color3.fromRGB(45, 45, 45),
-    MinSize = Vector2.new(400, 300),
-    MaxSize = Vector2.new(400, 300)
+    MinSize = Vector2.new(300, 200),
+    MaxSize = Vector2.new(300, 200)
 }
 
 local Menu = {}
