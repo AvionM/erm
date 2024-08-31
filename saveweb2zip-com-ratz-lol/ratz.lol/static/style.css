@@ -1,0 +1,144 @@
+/*
+
+Shitty styles cooked up by meta at 1am...
+Imagine using css and not tailwind smh
+I'm too fucking lazy to use svelte either...
+
+Creds go to me though, meta, @veryniceguy1337
+
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --text: #d3e0fd;
+    --background: #01050f;
+    --primary: #739ff8;
+    --secondary: #010818;
+    --accent: #8a35f4;    
+}
+
+/* Styles */
+
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+    background-color: var(--background);
+    color: var(--text);
+    font-family: 'Inter';
+}
+
+.landing-container {
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-header {
+    background: linear-gradient(120deg,var(--primary),var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-size: 41px;
+    margin-bottom: 0.4rem;
+}
+
+.landing-sub {
+    margin: 0;
+    font-size: 28px;
+}
+
+.landing-buttons {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.landing-button {
+    background-image: linear-gradient(120deg,var(--primary),var(--accent));
+    border: none;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 18px;
+    color: var(--text);
+    transition: 0.32s ease-in-out all;
+    text-decoration: none;
+}
+
+.landing-button:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: var(--secondary);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.32s ease-in-out all;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 0.4rem 0.2rem var(--primary);
+    cursor: pointer;
+}
+
+.card-image {
+    width: 130px;
+    height: 130px;
+}
+
+.card-header {
+    margin: 0;
+}
+
+.card-text {
+    margin-top: 0;
+}
+
+footer {
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+}
+
+/* Animations */
+
+@keyframes fade-up {
+    0% {
+        transform: translateY(30%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+  
+.fade-animation {
+    animation: 1.2s fade-up;
+}
+
+/* Responsive */
